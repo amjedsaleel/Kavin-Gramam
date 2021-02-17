@@ -1,3 +1,15 @@
-h1 {
-    color: red;
+html body {
+    margin: 0
+}
+
+.container-fluid{
+    padding: 0 !important;
+}
+
+.navbar-brand {
+    font-family: 'Baloo Chettan 2', cursive;
+}
+
+.nav-link:hover {
+    color: #e9ecef !important;
 }
