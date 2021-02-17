@@ -8,12 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static  'css/style.css' %}">
 </head>
 <body>
     {% block content %}
     {% endblock %}
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Custom JavaScript -->
     <script src="{% static 'js/script.js' %}"></script>
