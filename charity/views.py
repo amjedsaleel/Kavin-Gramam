@@ -4,14 +4,20 @@ from django.forms import inlineformset_factory
 
 # local Django
 from .forms import MemberForm, RequirementForm
-from .models import Member, HouseMember, Requirement
+from .models import Member, HouseMember, Category, Requirement
 
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'charity/index.html')
+    categories = Category.objects.all()
+
+    context = {
+        'categories': categories
+    }
+
+    return render(request, 'charity/index.html', context)
 
 
 def add_member(request):
@@ -27,7 +33,7 @@ def add_member(request):
 
         if member_form.is_valid() and requirements_form.is_valid():
             member_instance = member_form.save()  # Saved the all personal details of member
-            formset = house_member_formset(request.POST, instance=member_instance)
+            formset = house_member_formset(request.POST, instance=member_instance)  # Saved all details members in house
 
             if formset.is_valid():
                 formset.save()
@@ -47,3 +53,19 @@ def add_member(request):
 
     return render(request, 'charity/add-member.html', context)
 
+
+def view_by_category(request, category_id):
+    category = Category.objects.get(id=category_id)
+    requirements = Requirement.objects.filter(requirement=category)
+    print(requirements)
+
+    for i in requirements:
+        print(i.member.name)
+
+    context = {
+        'requirements': requirements,
+        'category': category,
+        'total_members': requirements.count()
+    }
+
+    return render(request, 'charity/view-by-category.html', context)

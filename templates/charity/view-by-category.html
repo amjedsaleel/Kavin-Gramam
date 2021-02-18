@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container bg-white mt-4 box-shadow">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="card mb-3 text-center mt-2">
+                    <div class="card-header fs-4"><b>{{ category }}<span
+                            class="badge rounded-pill bg-primary">{{ total_members }}</span></b></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">The list of the members who eligible for {{ category }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Members List -->
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Locality</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for requirement in requirements %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{ requirement.member.name }}</td>
+                        <td>{{ requirement.member.locality }}</td>
+                        <td>{{ requirement.member.phone }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
