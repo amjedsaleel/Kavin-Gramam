@@ -29,13 +29,14 @@ class Member(models.Model):
 
     name = models.CharField(max_length=30, verbose_name='Name')
     age = models.IntegerField(verbose_name='Age')
-    phone = models.CharField(max_length=10, help_text='Enter phone number without country code')
+    phone = models.PositiveIntegerField(help_text='Enter phone number without country code')
     house_name = models.CharField(max_length=50)
     locality = models.CharField(max_length=50)
-    pin_code = models.BigIntegerField()
+    pin_code = models.IntegerField()
     ration_card = models.CharField(choices=ration_card_status, max_length=10)
     annual_income = models.IntegerField()
     job = models.CharField(max_length=50)
+    remark = models.TextField(max_length=100, help_text='Max 100 letters', blank=True)
 
     def __str__(self):
         return self.name

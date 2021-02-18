@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Installed apps
-    'charity.apps.CharityConfig'
+    'charity.apps.CharityConfig',
+
+    # Installed via pip
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

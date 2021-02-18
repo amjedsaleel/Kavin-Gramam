@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 col-lg-12 text-center">
+                <h1>Add Member</h1>
+            </div>
+            <div class="col-12 col-lg-12 mb-2">
+                <h3>Personal information of applicant</h3>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form action="{% url 'charity:add-member' %}" method="POST" class="row g-3">
+            {% csrf_token %}
+
+            <!-- Personal information of applicant -->
+            <div class="col-md-8">
+                {{ member_form.name | as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ member_form.age | as_crispy_field }}
+            </div>
+            <div class="col-12 col-md-4">
+                {{ member_form.house_name | as_crispy_field }}
+            </div>
+            <div class="col-12 col-md-4">
+                {{ member_form.locality | as_crispy_field }}
+            </div>
+            <div class="col-12 col-md-4">
+                {{ member_form.pin_code | as_crispy_field }}
+            </div>
+            <div class="col-md-8">
+                {{ member_form.job | as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ member_form.annual_income | as_crispy_field }}
+            </div>
+            <div class="col-md-8">
+                {{ member_form.phone | as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ member_form.ration_card | as_crispy_field }}
+            </div>
+
+            <!-- Members in house -->
+            <div class="col-12 col-lg-12 mb-2">
+                <h3>Members in house</h3>
+            </div>
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="col-md-3">
+                    {{ form.name | as_crispy_field }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.relationship | as_crispy_field }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.job | as_crispy_field }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.age | as_crispy_field }}
+                </div>
+            {% endfor %}
+
+            <!-- Remark about applicant -->
+              <div class="col-12 col-md-12">
+                {{ member_form.remark | as_crispy_field }}
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

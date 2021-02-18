@@ -7,5 +7,6 @@ from . import views
 app_name = 'charity'
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('add-member', views.add_member, name='add-member')
 ]
