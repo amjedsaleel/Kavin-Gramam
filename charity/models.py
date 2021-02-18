@@ -1,21 +1,8 @@
-# third party
-from phonenumber_field.modelfields import PhoneNumberField
-
 # Django
 from django.db import models
 
 
 # Create your models here.
-
-
-class Category(models.Model):
-    """
-    Defines that which type of category are providing. eg:- Food, Medicine etc
-    """
-    category = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.category
 
 
 class Member(models.Model):
@@ -47,10 +34,32 @@ class HouseMember(models.Model):
     Its for adding house members details of an member to added to charitable trust
     """
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    age = models.IntegerField()
-    job = models.CharField(max_length=50)
-    relationship = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True)
+    age = models.IntegerField(blank=True, null=True)
+    job = models.CharField(max_length=50, blank=True)
+    relationship = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    """
+    Defines that which type of category are providing. eg:- Food, Medicine etc
+    """
+    category = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.category
+
+
+class Requirement(models.Model):
+    """
+    requirement for a member
+    """
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    requirement = models.ManyToManyField(Category)
+
+
+
+

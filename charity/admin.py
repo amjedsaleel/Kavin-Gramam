@@ -2,10 +2,13 @@
 from django.contrib import admin
 
 # local Django
-from . models import Category, Member, HouseMember
+from . models import Category, Member, HouseMember, Requirement
 
 # Register your models here.
 
 admin.site.register(Category)
 admin.site.register(Member)
 admin.site.register(HouseMember)
+admin.site.register(Requirement)
+
+

@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 
 # local Django
-from .forms import MemberForm
-from .models import Member, HouseMember
+from .forms import MemberForm, RequirementForm
+from .models import Member, HouseMember, Requirement
 
 
 # Create your views here.
@@ -18,23 +18,32 @@ def add_member(request):
     member_form = MemberForm()
     house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),
                                                  extra=6, can_delete=False)
-    if request.method == 'POST':
-        form = MemberForm(request.POST)
+    formset = house_member_formset()
+    requirements_form = RequirementForm()
 
-        if form.is_valid():
-            instance = form.save()
-            formset = house_member_formset(request.POST, instance=instance)
+    if request.method == 'POST':
+        member_form = MemberForm(request.POST)
+        requirements_form = RequirementForm(request.POST)
+
+        if member_form.is_valid() and requirements_form.is_valid():
+            member_instance = member_form.save()  # Saved the all personal details of member
+            formset = house_member_formset(request.POST, instance=member_instance)
 
             if formset.is_valid():
                 formset.save()
 
-            return redirect('charity:add-member')
+            requirements_instance = requirements_form.save(commit=False)
+            requirements_instance.member = member_instance
+            requirements_instance.save()
+            requirements_form._save_m2m()
 
-    formset = house_member_formset()
+            return redirect('charity:add-member')
 
     context = {
         'member_form': member_form,
-        'formset': formset
+        'formset': formset,
+        'requirement': requirements_form
     }
 
     return render(request, 'charity/add-member.html', context)
+
