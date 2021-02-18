@@ -57,9 +57,5 @@ class Requirement(models.Model):
     """
     requirement for a member
     """
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    requirement = models.ManyToManyField(Category)
-
-
-
-
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True)
+    requirement = models.ManyToManyField(Category, blank=True, verbose_name='Requirements')

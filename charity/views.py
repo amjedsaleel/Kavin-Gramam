@@ -42,7 +42,7 @@ def add_member(request):
     context = {
         'member_form': member_form,
         'formset': formset,
-        'requirement': requirements_form
+        'requirements': requirements_form
     }
 
     return render(request, 'charity/add-member.html', context)

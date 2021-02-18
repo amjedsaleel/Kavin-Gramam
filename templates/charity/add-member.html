@@ -69,10 +69,15 @@
             {% endfor %}
 
             <!-- Remark about applicant -->
-              <div class="col-12 col-md-12">
+            <div class="col-12 col-md-12">
                 {{ member_form.remark | as_crispy_field }}
             </div>
-            {{ requirement }}
+
+            {% for requirement in requirements %}
+                <div class="col-2 col-lg-3">
+                    {{ requirement | as_crispy_field }}
+                </div>
+            {% endfor %}
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
