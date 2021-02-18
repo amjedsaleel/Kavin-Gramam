@@ -69,3 +69,7 @@ def view_by_category(request, category_id):
     }
 
     return render(request, 'charity/view-by-category.html', context)
+
+
+def view_all_members(request):
+    return render(request, 'charity/view-all-members.html')
