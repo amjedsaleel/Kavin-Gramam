@@ -4,7 +4,7 @@ from django.forms import inlineformset_factory
 
 # local Django
 from .forms import MemberForm, RequirementForm
-from .models import Member, HouseMember, Category, Requirement
+from .models import Member, HouseMember, Category, Need
 
 
 # Create your views here.
@@ -56,13 +56,13 @@ def add_member(request):
 
 def view_by_category(request, category_id):
     category = Category.objects.get(id=category_id)
-    requirements = Requirement.objects.filter(requirement=category)
-    print(requirements)
+    needs = Need.objects.filter(requirement=category)
+    print(needs)
 
     context = {
-        'requirements': requirements,
+        'requirements': needs,
         'category': category,
-        'total_members': requirements.count()
+        'total_members': needs.count()
     }
 
     return render(request, 'charity/view-by-category.html', context)
@@ -70,19 +70,8 @@ def view_by_category(request, category_id):
 
 def view_all_members(request):
     members = Member.objects.all()
-    requirements = Requirement.objects.all()
-
-    # memb = Member.objects.filter(requirement__in=[2,1,3])
-
-    for member in members:
-        print(member.name)
-        for i in member.requirement_set.all():
-            print('re:', i.requirement)
-
-    # print(requirements)
 
     context = {
         'members': members,
-        'requirements': requirements,
     }
     return render(request, 'charity/view-all-members.html', context)

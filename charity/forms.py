@@ -2,7 +2,7 @@
 from django import forms
 
 # local Django
-from . models import Member, HouseMember, Requirement
+from . models import Member, HouseMember, Need
 
 
 class MemberForm(forms.ModelForm):
@@ -16,5 +16,5 @@ class RequirementForm(forms.ModelForm):
         widgets = {
             'requirement': forms.CheckboxSelectMultiple()
         }
-        model = Requirement
+        model = Need
         fields = ['requirement']

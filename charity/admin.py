@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # local Django
-from . models import Category, Member, HouseMember, Requirement
+from . models import Category, Member, HouseMember, Need
 
 # Register your models here.
 
@@ -30,6 +30,6 @@ class RequirementAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Member, MemberAdmin)
 admin.site.register(HouseMember, HouseMemberAdmin)
-admin.site.register(Requirement, RequirementAdmin)
+admin.site.register(Need, RequirementAdmin)
 
 

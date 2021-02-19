@@ -56,7 +56,7 @@ class Category(models.Model):
         return self.category
 
 
-class Requirement(models.Model):
+class Need(models.Model):
     """
     requirement for a member
     """

@@ -22,10 +22,9 @@
                             <td class="col-1 col-lg-2">{{ member.locality }}</td>
                             <td class="col-1 col-lg-2">{{ member.locality }}</td>
                             <td class="col-1 col-lg-1">
-                                {% for i in  member.requirement_set.all %}
-{#                                {{ member.requirement_set.all }}#}
-                                    {{ i.requirement }}
-                                    {% endfor %}
+                                {% for requirment in member.need.requirement.all %}
+                                    {{ requirment }}
+                                {% endfor %}
                             </td>
                             <td class="col-1 col-lg-1">{{ member.phone }}</td>
                             <td class="col-7 col-lg-4">{{ member.remark }}</td>
