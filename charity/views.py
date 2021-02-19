@@ -75,3 +75,15 @@ def view_all_members(request):
         'members': members,
     }
     return render(request, 'charity/view-all-members.html', context)
+
+
+def view_member(request, id):
+    member = Member.objects.get(id=id)
+    house_members = member.housemember_set.all()
+
+    context = {
+        'member': member,
+        'house_members': house_members
+    }
+
+    return render(request, 'charity/member-detail.html', context)

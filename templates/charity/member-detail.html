@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 card mt-4 shadow-sm p-3 mb-5 bg-body rounded">
+                <h3 class="text-center mt-2">{{ member.name }}</h3>
+                <table class="table table-responsive table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="fw-bold">Age</td>
+                        <td>{{ member.age }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Phone</td>
+                        <td>{{ member.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">House</td>
+                        <td>{{ member.house_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Locality</td>
+                        <td>{{ member.locality }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Pin</td>
+                        <td>{{ member.pin_code }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Ration Card</td>
+                        <td>{{ member.ration_card }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Annual Income</td>
+                        <td>{{ member.annual_income }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Job</td>
+                        <td>{{ member.job }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h5>Requirements:</h5>
+                <div class="requirements ml-4">
+                    {% for requirment in member.need.requirement.all %}
+                        <p>{{ requirment }}</p>
+                    {% endfor %}
+                    <hr>
+                </div>
+                <h5>Remark</h5>
+                <p>{{ member.remark }}</p>
+            </div>
+
+            <div class="col-12 col-lg-7 m-4 mt-4 cart shadow-sm p-3 mb-5 bg-body rounded">
+                <h3 class="text-center mt-3">Family Information</h3>
+                <table class="table table-responsive table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Job</th>
+                        <th scope="col">Relationship</th>
+                    </tr>
+                    </thead>
+                    {% for house_member in house_members %}
+                        <tr>
+                            <td>{{ house_member.name }}</td>
+                            <td>{{ house_member.age }}</td>
+                            <td>{{ house_member.job }}</td>
+                            <td>{{ house_member.relationship }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
