@@ -25,6 +25,9 @@ class Member(models.Model):
     job = models.CharField(max_length=50)
     remark = models.TextField(max_length=100, help_text='Max 100 letters', blank=True)
 
+    class Meta:
+        unique_together = ('name', 'house_name', 'phone')
+
     def __str__(self):
         return self.name
 
@@ -57,5 +60,5 @@ class Requirement(models.Model):
     """
     requirement for a member
     """
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True)
+    member = models.OneToOneField(Member, on_delete=models.CASCADE,)
     requirement = models.ManyToManyField(Category, blank=True,)
