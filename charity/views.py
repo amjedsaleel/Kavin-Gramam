@@ -59,9 +59,6 @@ def view_by_category(request, category_id):
     requirements = Requirement.objects.filter(requirement=category)
     print(requirements)
 
-    for i in requirements:
-        print(i.member.name)
-
     context = {
         'requirements': requirements,
         'category': category,
@@ -72,4 +69,20 @@ def view_by_category(request, category_id):
 
 
 def view_all_members(request):
-    return render(request, 'charity/view-all-members.html')
+    members = Member.objects.all()
+    requirements = Requirement.objects.all()
+
+    # memb = Member.objects.filter(requirement__in=[2,1,3])
+
+    for member in members:
+        print(member.name)
+        for i in member.requirement_set.all():
+            print('re:', i.requirement)
+
+    # print(requirements)
+
+    context = {
+        'members': members,
+        'requirements': requirements,
+    }
+    return render(request, 'charity/view-all-members.html', context)
