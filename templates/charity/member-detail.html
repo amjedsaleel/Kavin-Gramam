@@ -168,25 +168,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{% url 'charity:update-member-family' member.id %}" method="post">
+                        <form action="{% url 'charity:add-member-family' member.id %}" method="post">
                             {% csrf_token %}
-                            {{ formset.management_form }}
-
-                            {% for form in formset %}
-                                <ul style="list-style:none; padding:0">
-                                    <li>{{ form.name | as_crispy_field }}</li>
-                                    <li>{{ form.age | as_crispy_field }}</li>
-                                    <li>{{ form.job | as_crispy_field }}</li>
-                                    <li>{{ form.relationship | as_crispy_field }}</li>
-
-                                    {% if formset.can_delete %}
-                                        <li>{{ form.DELETE }} <span>Delete</span></li>
-                                    {% endif %}
-                                </ul>
-                                <hr class="mt-4">
-                            {% endfor %}
-
-                            <div class="model-footer">
+                            {{ member_family_form | crispy}}
+                            <div class="model-footer mt-4">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-primary" value="Save Changes">
                             </div>

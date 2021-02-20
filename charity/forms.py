@@ -18,3 +18,9 @@ class RequirementForm(forms.ModelForm):
         }
         model = Need
         fields = ['requirement']
+
+
+class MemberFamilyForm(forms.ModelForm):
+    class Meta:
+        model = HouseMember
+        fields = ['name', 'age', 'job', 'relationship']

@@ -4,7 +4,7 @@ from django.forms import inlineformset_factory
 from django.urls import reverse
 
 # local Django
-from .forms import MemberForm, RequirementForm
+from .forms import MemberForm, RequirementForm, MemberFamilyForm
 from .models import Member, HouseMember, Category, Need
 
 
@@ -85,16 +85,16 @@ def view_member(request, id):
     member_form = MemberForm(instance=member)
     requirements_form = RequirementForm(instance=member.need)
 
-    house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),
-                                                 extra=1, can_delete=True)
-    formset = house_member_formset()
+    # house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),
+    #                                              extra=1, can_delete=True)
+    # formset = house_member_formset()
 
     context = {
         'member': member,
         'house_members': house_members,
         'member_form': member_form,
         'requirements_form': requirements_form,
-        'formset': formset
+        'member_family_form': MemberFamilyForm
     }
 
     return render(request, 'charity/member-detail.html', context)
@@ -128,16 +128,15 @@ def update_member_requirements(request, id):
         return redirect(reverse('charity:view-member', args=id))
 
 
-def update_member_family(request, id):
-    house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),)
-    formset = house_member_formset()
+def add_member_family(request, id):
 
     if request.method == 'POST':
-        member_instance = Member.objects.get(id=id)
-        formset = house_member_formset(request.POST, instance=member_instance)
+        member = Member.objects.get(id=id)
+        form = MemberFamilyForm(request.POST)
 
-        if formset.is_valid():
-            print('valid')
-            formset.save()
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.member = member
+            instance.save()
 
         return redirect(reverse('charity:view-member', args=id))

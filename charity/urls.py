@@ -14,5 +14,5 @@ urlpatterns = [
     path('member/<str:id>', views.view_member, name='view-member'),
     path('update-member-info/<str:id>', views.update_member_personal_info, name='update-member-member-info'),
     path('update-requirements/<str:id>', views.update_member_requirements, name='update-member-requirements'),
-    path('update-family/<str:id>', views.update_member_family, name='update-member-family')
+    path('add-member-family/<str:id>', views.add_member_family, name='add-member-family')
 ]
