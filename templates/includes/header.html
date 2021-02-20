@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-3 fst-italic" href="#">കനിവ് ഗ്രാമം</a>
+        <a class="navbar-brand fs-3 fst-italic" href="{% url 'charity:index' %}">കനിവ് ഗ്രാമം</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -10,13 +10,13 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active fs-5 fw-bolder" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active fs-5 fw-bolder" aria-current="page" href="{% url 'charity:index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active fs-5 fw-bolder" href="#">View Members</a>
+                    <a class="nav-link active fs-5 fw-bolder" href="{% url 'charity:view-all-members' %}">View Members</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active fs-5 fw-bolder" href="#">Add Member</a>
+                    <a class="nav-link active fs-5 fw-bolder" href="{% url 'charity:add-member' %}">Add Member</a>
                 </li>
             </ul>
             <form class="d-flex">
