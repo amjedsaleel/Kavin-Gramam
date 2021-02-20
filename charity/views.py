@@ -140,3 +140,24 @@ def add_member_family(request, id):
             instance.save()
 
         return redirect(reverse('charity:view-member', args=id))
+
+
+def family_member(request, id, family_member_id):
+    member = HouseMember.objects.get(id=family_member_id)
+    form = MemberFamilyForm(instance=member)
+
+    if request.method == 'POST':
+        form = MemberFamilyForm(request.POST, instance=member)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('charity:view-member', args=id))
+
+    context = {
+        'form': form,
+        'id': id,
+        'family_member_id': family_member_id
+    }
+
+    return render(request, 'charity/family_member.html', context)
+

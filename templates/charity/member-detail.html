@@ -97,6 +97,7 @@
                         <th scope="col">Age</th>
                         <th scope="col">Job</th>
                         <th scope="col">Relationship</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     {% for house_member in house_members %}
@@ -105,6 +106,10 @@
                             <td>{{ house_member.age }}</td>
                             <td>{{ house_member.job }}</td>
                             <td>{{ house_member.relationship }}</td>
+                            <td>
+                                <a href="{% url 'charity:family-member' member.id house_member.id %}"
+                                   class="btn btn-sm btn-primary">Edit</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -170,7 +175,7 @@
                     <div class="modal-body">
                         <form action="{% url 'charity:add-member-family' member.id %}" method="post">
                             {% csrf_token %}
-                            {{ member_family_form | crispy}}
+                            {{ member_family_form | crispy }}
                             <div class="model-footer mt-4">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-primary" value="Save Changes">
@@ -180,5 +185,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}
