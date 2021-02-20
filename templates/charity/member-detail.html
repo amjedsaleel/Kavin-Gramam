@@ -7,11 +7,14 @@
         <div class="row">
             <!-- Personal Details -->
             <div class="col-12 col-lg-4 card mt-4 shadow-sm p-3 mb-5 bg-body rounded">
-                <h3 class="text-center mt-2">{{ member.name }} <span><img
-                        src="{% static 'images/icons8-edit(1).svg' %}"
-                        alt="" srcset="" width="30"
-                        data-bs-toggle="modal"
-                        data-bs-target="#personal-detail-model" style="cursor:pointer"></span></h3>
+                <h3 class="text-center mt-2">{{ member.name }} <span>
+                    <!-- Button trigger modal for edit personal information-->
+                    <img
+                            src="{% static 'images/icons8-edit(1).svg' %}"
+                            alt="" srcset="" width="30"
+                            data-bs-toggle="modal"
+                            data-bs-target="#personal-detail-model" style="cursor:pointer">
+                </span></h3>
                 <table class="table table-responsive table-hover">
                     <thead>
                     <tr>
@@ -56,7 +59,16 @@
                 </table>
 
                 <!-- Member Requirements -->
-                <h5>Requirements:</h5>
+                <h5>
+                    Requirements:
+                    <span>
+                        <img
+                                src="{% static 'images/icons8-edit(1).svg' %}"
+                                alt="" srcset="" width="30"
+                                data-bs-toggle="modal"
+                                data-bs-target="#member-requirements" style="cursor:pointer">
+                    </span>
+                </h5>
                 <div class="requirements ml-4">
                     {% for requirment in member.need.requirement.all %}
                         <p>{{ requirment }}</p>
@@ -69,7 +81,15 @@
 
             <!-- Family Details -->
             <div class="col-12 col-lg-7 m-4 mt-4 cart shadow-sm p-3 mb-5 bg-body rounded">
-                <h3 class="text-center mt-3">Family Information</h3>
+                <h3 class="text-center mt-3">Family Information
+                    <span>
+                        <img
+                                src="{% static 'images/icons8-edit(1).svg' %}"
+                                alt="" srcset="" width="30"
+                                data-bs-toggle="modal"
+                                data-bs-target="#family-information" style="cursor:pointer">
+                    </span>
+                </h3>
                 <table class="table table-responsive table-hover">
                     <thead>
                     <tr>
@@ -91,19 +111,43 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modals -->
+        <!-- Member Information Model -->
         <div class="modal fade" id="personal-detail-model" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+             aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Personal Information</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{% url 'charity:update-member-member-info' member.id %}" method="post">
                             {% csrf_token %}
-                            {{ member_form | crispy}}
+                            {{ member_form | crispy }}
+                            <div class="model-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Requirement Model -->
+        <div class="modal fade" id="member-requirements" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Personal Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'charity:update-member-requirements' member.id %}" method="post">
+                            {% csrf_token %}
+                            {{ requirements_form| crispy }}
                             <div class="model-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-primary" value="Save Changes">

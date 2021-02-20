@@ -83,13 +83,13 @@ def view_member(request, id):
     house_members = member.housemember_set.all()
 
     member_form = MemberForm(instance=member)
-    requirements_form = RequirementForm()
+    requirements_form = RequirementForm(instance=member.need)
 
     context = {
         'member': member,
         'house_members': house_members,
         'member_form': member_form,
-        'requirements_form': requirements_form
+        'requirements_form': requirements_form,
     }
 
     return render(request, 'charity/member-detail.html', context)
@@ -103,7 +103,6 @@ def update_member_personal_info(request, id):
         print(form.errors)
 
         if form.is_valid():
-            print('form is valid')
             form.save()
             return redirect(reverse('charity:view-member', args=id))
 
@@ -111,3 +110,14 @@ def update_member_personal_info(request, id):
         return redirect(reverse('charity:view-member', args=id))
 
 
+def update_member_requirements(request, id):
+
+    if request.method == 'POST':
+        member = Member.objects.get(id=id).need
+        form = RequirementForm(request.POST, instance=member)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('charity:view-member', args=id))
+
+        return redirect(reverse('charity:view-member', args=id))

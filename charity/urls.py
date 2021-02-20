@@ -12,5 +12,6 @@ urlpatterns = [
     path('<int:category_id>', views.view_by_category, name='view-by-category'),
     path('members', views.view_all_members, name='view-all-members'),
     path('member/<str:id>', views.view_member, name='view-member'),
-    path('update-member-info/<str:id>', views.update_member_personal_info, name='update-member-member-info')
+    path('update-member-info/<str:id>', views.update_member_personal_info, name='update-member-member-info'),
+    path('update-rrequirements/<str:id>', views.update_member_requirements, name='update-member-requirements',)
 ]
