@@ -161,3 +161,8 @@ def family_member(request, id, family_member_id):
 
     return render(request, 'charity/family_member.html', context)
 
+
+def delete_family_member(request, id, family_member_id):
+    member = HouseMember.objects.get(id=family_member_id).delete()
+    return redirect(reverse('charity:view-member', args=id))
+

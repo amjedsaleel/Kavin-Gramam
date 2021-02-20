@@ -11,7 +11,10 @@
                 <form action="/family-member/{{ id }}/{{ family_member_id }}" method="post">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <input type="submit" value="Update" class="btn btn-primary mt-4">
+                    <div>
+                        <input type="submit" value="Update" class="btn btn-primary mt-4">
+                        <a href="/delete_family_member/{{ id }}/{{ family_member_id }}" class="btn btn-danger mt-4">Delete</a>
+                    </div>
                 </form>
             </div>
         </div>
