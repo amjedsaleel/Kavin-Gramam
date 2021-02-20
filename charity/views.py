@@ -85,11 +85,16 @@ def view_member(request, id):
     member_form = MemberForm(instance=member)
     requirements_form = RequirementForm(instance=member.need)
 
+    house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),
+                                                 extra=1, can_delete=True)
+    formset = house_member_formset()
+
     context = {
         'member': member,
         'house_members': house_members,
         'member_form': member_form,
         'requirements_form': requirements_form,
+        'formset': formset
     }
 
     return render(request, 'charity/member-detail.html', context)
@@ -119,5 +124,20 @@ def update_member_requirements(request, id):
         if form.is_valid():
             form.save()
             return redirect(reverse('charity:view-member', args=id))
+
+        return redirect(reverse('charity:view-member', args=id))
+
+
+def update_member_family(request, id):
+    house_member_formset = inlineformset_factory(Member, HouseMember, fields=('name', 'age', 'job', 'relationship'),)
+    formset = house_member_formset()
+
+    if request.method == 'POST':
+        member_instance = Member.objects.get(id=id)
+        formset = house_member_formset(request.POST, instance=member_instance)
+
+        if formset.is_valid():
+            print('valid')
+            formset.save()
 
         return redirect(reverse('charity:view-member', args=id))

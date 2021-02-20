@@ -158,5 +158,42 @@
             </div>
         </div>
 
+        <!-- Member Family Model -->
+        <div class="modal fade" id="family-information" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Personal Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'charity:update-member-family' member.id %}" method="post">
+                            {% csrf_token %}
+                            {{ formset.management_form }}
+
+                            {% for form in formset %}
+                                <ul style="list-style:none; padding:0">
+                                    <li>{{ form.name | as_crispy_field }}</li>
+                                    <li>{{ form.age | as_crispy_field }}</li>
+                                    <li>{{ form.job | as_crispy_field }}</li>
+                                    <li>{{ form.relationship | as_crispy_field }}</li>
+
+                                    {% if formset.can_delete %}
+                                        <li>{{ form.DELETE }} <span>Delete</span></li>
+                                    {% endif %}
+                                </ul>
+                                <hr class="mt-4">
+                            {% endfor %}
+
+                            <div class="model-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
