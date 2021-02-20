@@ -1,6 +1,7 @@
 # Django
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
+from django.urls import reverse
 
 # local Django
 from .forms import MemberForm, RequirementForm
@@ -81,9 +82,32 @@ def view_member(request, id):
     member = Member.objects.get(id=id)
     house_members = member.housemember_set.all()
 
+    member_form = MemberForm(instance=member)
+    requirements_form = RequirementForm()
+
     context = {
         'member': member,
-        'house_members': house_members
+        'house_members': house_members,
+        'member_form': member_form,
+        'requirements_form': requirements_form
     }
 
     return render(request, 'charity/member-detail.html', context)
+
+
+def update_member_personal_info(request, id):
+
+    if request.method == 'POST':
+        member = Member.objects.get(id=id)
+        form = MemberForm(request.POST, instance=member)
+        print(form.errors)
+
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect(reverse('charity:view-member', args=id))
+
+        print('form not valid')
+        return redirect(reverse('charity:view-member', args=id))
+
+
